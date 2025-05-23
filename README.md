@@ -6,7 +6,7 @@ AirGradient Map API is a backend service that stores and serves air quality data
 
 ### Backend Service
 
-API docs are available [here](https://map-data-int.airgradient.com/map/api/v1/docs) or if service available locally, go to http://localhost:3000/map/api/v1/docs. 
+API docs are available [here](https://map-data-int.airgradient.com/map/api/v1/docs) or if service available locally, go to http://localhost:3001/map/api/v1/docs.
 
 #### Tasks
 
@@ -41,12 +41,20 @@ Database is PostgreSQL with 2 extensions [PostGIS](https://postgis.net/) and [pg
 
 ## Development Setup
 
+### Configure env configuration
+
+Copy `.env.development` to `.env.development.local`
+
+From `.env.development.local` the only necessary thing needs to be changed is `API_KEY_OPENAQ` configuration. To get the key, please follow steps from OpenAQ [here](https://docs.openaq.org/using-the-api/api-key)
+
+### Docker
+
 Prerequisite: Docker
 
 Spin up both the database and api services from the root of the repository:
 
 ```sh
-docker compose --env-file .env.development -f docker-compose-dev.yml up [-d] [--build]
+docker compose --env-file .env.development.local -f docker-compose-dev.yml up [-d] [--build]
 ```
 
 This automatically builds and starts the necessary containers. When developing and changing source files, the api service automatically reloads the source files. Use the `--build` option when you change npm dependencies and need to rebuild the image. Optionally use the `-d` option for running detached in the background.
@@ -54,12 +62,8 @@ This automatically builds and starts the necessary containers. When developing a
 To stop the services, run:
 
 ```sh
-docker compose --env-file .env.development -f docker-compose-dev.yml down
+docker compose --env-file .env.development.local -f docker-compose-dev.yml down
 ```
-
-### Configure env configuration 
-
-From `.env.development` the only necessary thing needs to be changed is `API_KEY_OPENAQ` configuration. To get the key, please follow steps from OpenAQ [here](https://docs.openaq.org/using-the-api/api-key)
 
 ### Seed Data to the Database
 

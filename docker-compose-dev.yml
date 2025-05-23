@@ -23,7 +23,7 @@ services:
       dockerfile: tools/docker/Dockerfile
     command: npm run start:dev
     ports:
-      - 3000:3000
+      - 3001:3001
     volumes:
       - ./src:/app/src
     networks:
