@@ -1,3 +1,9 @@
+### IMPORTANT. This repo is no longer mainained as it has been combined with the frontend repo into a mono-repo. Please use below mono-repo:
+
+https://github.com/airgradienthq/airgradient-map-web
+
+______
+
 # AirGradient Map API
 
 AirGradient Map API is a backend service that stores and serves air quality data from various sources
