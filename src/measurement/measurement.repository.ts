@@ -20,6 +20,12 @@ class MeasurementRepository {
       measureSelectQuery = `m.pm25, m.pm10, m.atmp, m.rhum, m.rco2, m.o3, m.no2`;
     }
 
+    // Only include rows that include for the requested measure.
+    var measureWhereQuery: string = "";
+    if (measure) {
+      measureWhereQuery = `WHERE m.${measure} IS NOT NULL`;
+    }
+
     const query = ` 
             WITH latest_measurements AS (
                 SELECT 
@@ -45,6 +51,7 @@ class MeasurementRepository {
                 measurement m ON lm.location_id = m.location_id AND lm.last_measured_at = m.measured_at
             JOIN 
                 location l ON m.location_id = l.id
+            ${measureWhereQuery}
             ORDER BY 
                 lm.location_id 
             OFFSET $1 LIMIT $2; 
